@@ -1,4 +1,17 @@
-export let houses = [
+type House={
+  id:number,
+  address:string,
+  type:string
+}
+type Resident = {
+  id: number,
+  name: string,
+  age: number,
+  gender: string,
+  houseId: number
+};
+
+export let houses:House[] = [
   {
     id: 1,
     address: "Street 1",
@@ -20,7 +33,7 @@ export let houses = [
     type: "flat",
   },
 ];
-export let residents = [
+export let residents:Resident[] = [
     {
         id:1,
         name:"Darvin",

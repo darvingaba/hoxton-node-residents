@@ -6,7 +6,7 @@ import { houses, residents} from "./housesData"
 const app =express()
 app.use(cors())
 
-const port = 3002
+const port = 3003
 
 app.get("/",(req,res)=>{
     res.send(`
@@ -21,20 +21,32 @@ app.get("/",(req,res)=>{
 
 app.get("/houses",(req,res)=>{
     let houseData= houses.map(house=>{
-        let residentInfo= residents.find(resident=>resident.houseId===house.id)
-        return { ...house, residentInfo };
+      let residentInfo= residents.find(resident=>resident.houseId===house.id)
+      return [{ ...house, residentInfo }]
     })
     res.send(houseData);
-})
+  })
+  app.post("/houses",(req,res)=>{
+    // let newHouse = {
+    //   id: houses[houses.length - 1].id + 1,
+    //   address: req.body.address,
+    //   type: req.body.type
+    // };
+    // console.log(req.body.address);
+    // houses.push(newHouse)
+    res.send(houses)
+    
+  })
 
 app.get("/residents",(req,res)=>{
     let residentsOfHouse = residents.map((resident) => {
       let house = houses.find((house) => house.id === resident.houseId);
+      console.log(house)
       return { ...resident, house };
     });
     res.send(residentsOfHouse)
 })
 
-app.listen(port,()=>{
-    console.log("started at 3002")
-})
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
